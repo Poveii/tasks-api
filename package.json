@@ -1,0 +1,12 @@
+{
+  "name": "tasks-api",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch src/server.js"
+  },
+  "author": "poveii",
+  "license": "MIT"
+}
