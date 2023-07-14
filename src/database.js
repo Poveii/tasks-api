@@ -30,4 +30,10 @@ export class Database {
 
     return data
   }
+
+  select(table) {
+    let data = this.#database[table] ?? []
+
+    return data
+  }
 }
