@@ -36,4 +36,15 @@ export class Database {
 
     return data
   }
+
+  update(table, id, data) {
+    const rowIndex = this.#database[table].findIndex((row) => row.id === id)
+
+    if (rowIndex > -1) {
+      Object.entries(data).forEach(([key, value]) => {
+        this.#database[table][rowIndex][key] = value
+      })
+      this.#persists()
+    }
+  }
 }
