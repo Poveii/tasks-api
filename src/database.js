@@ -31,8 +31,22 @@ export class Database {
     return data
   }
 
-  select(table) {
-    const data = this.#database[table] ?? []
+  select(table, search) {
+    let data = this.#database[table] ?? []
+
+    if (search) {
+      data = data.filter((row) => {
+        return Object.entries(search).some(([key, value]) => {
+          if (!value) return false
+
+          if (value.includes('+') || value.includes('%20')) {
+            value = decodeURI(value).replaceAll('+', ' ')
+          }
+
+          return row[key].includes(value)
+        })
+      })
+    }
 
     return data
   }
