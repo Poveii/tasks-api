@@ -35,9 +35,16 @@ export class Database {
     let data = this.#database[table] ?? []
 
     if (search) {
+      const uuidRegex =
+        /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/
+
       data = data.filter((row) => {
         return Object.entries(search).some(([key, value]) => {
-          if (!value) return false
+          if (!value) return true
+
+          if (!uuidRegex.test(value)) {
+            return false
+          }
 
           if (value.includes('+') || value.includes('%20')) {
             value = decodeURI(value).replaceAll('+', ' ')
