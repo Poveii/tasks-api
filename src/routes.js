@@ -29,6 +29,14 @@ export const routes = [
     method: 'POST',
     path: buildRoutePath('/tasks'),
     handler: (req, res) => {
+      if (!req.body) {
+        return res.writeHead(400).end(
+          JSON.stringify({
+            message: 'Both title and description are required',
+          }),
+        )
+      }
+
       const { title, description } = req.body
 
       if (!title) {
@@ -69,6 +77,14 @@ export const routes = [
         return res
           .writeHead(404)
           .end(JSON.stringify({ message: 'task not found.' }))
+      }
+
+      if (!req.body || (!req.body.title && !req.body.description)) {
+        return res.writeHead(400).end(
+          JSON.stringify({
+            message: 'Both title and description are required',
+          }),
+        )
       }
 
       const body = {
