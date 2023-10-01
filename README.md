@@ -1,5 +1,10 @@
 # Tasks API
 
+[comment]: # (Badge das Tecnologias)
+
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+
 Uma API simples que é possível criar, editar e deletar tasks.
 
 Eu decidi fazer esse projeto porque eu vi a necessidade em mim de aprender mais sobre backend, então eu me baseei no projeto desafio do curso Ignite da Rocketseat, o [challenge-ignite-nodejs-01-fundamentos-nodejs](https://github.com/rocketseat-education/challenge-ignite-nodejs-01-fundamentos-nodejs), que eu tive acesso ao curso com a oportunidade de testar ele por 7 dias.
