@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto'
 
 import { buildRoutePath } from './utils/build-route-path.js'
 import { Database } from './database.js'
+import { readCSV } from './middlewares/read-csv.js'
 
 const database = new Database()
 
@@ -133,6 +134,30 @@ export const routes = [
       database.update('tasks', id, { completed_at: completedAt })
 
       return res.writeHead(204).end()
+    },
+  },
+  {
+    method: 'POST',
+    path: buildRoutePath('/tasks/csv'),
+    handler: async (req, res) => {
+      const csvPath = new URL('./sample.csv', import.meta.url)
+
+      const csvArray = await readCSV(csvPath)
+
+      csvArray.forEach(({ title, description }) => {
+        const task = {
+          id: randomUUID(),
+          title,
+          description,
+          created_at: new Date(),
+          updated_at: null,
+          completed_at: null,
+        }
+
+        database.insert('tasks', task)
+      })
+
+      return res.writeHead(200).end(JSON.stringify({ csvArray }))
     },
   },
 ]
